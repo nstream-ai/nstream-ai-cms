@@ -2,15 +2,16 @@ import { MDXRemote } from 'next-mdx-remote/rsc';
 import { getAllPostSlugs, getPostBySlug } from '@/lib/markdown';
 
 export async function generateStaticParams() {
-  const posts = getAllPostSlugs();
+  const posts = await getAllPostSlugs();
   return posts.map((post) => ({
     slug: post.slug,
   }));
 }
 
-export default function Post({ params }: { params: { slug: string } }) {
-  const { slug } = params;
-  const { frontMatter, content } = getPostBySlug(slug);
+// Add the async keyword here
+export default async function Post({ params }: { params: { slug: string } }) {
+  const { slug } = await params;
+  const { frontMatter, content } = await getPostBySlug(slug);
   
   return (
     <div className="max-w-3xl mx-auto py-8 px-4">
