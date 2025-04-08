@@ -10,6 +10,7 @@ import xIcon from '../../assets/xIcon.png'
 import copyright from '../../assets/copyright.png'
 import Image from "next/image";
 
+/* eslint-disable @typescript-eslint/no-explicit-any */
 type BlogPageProps = {
     posts: {
         slug: any;
@@ -19,6 +20,7 @@ type BlogPageProps = {
         content: string;
     }[];
   };
+  /* eslint-disable @typescript-eslint/no-explicit-any */
 
 export default function BlogPage({ posts } : BlogPageProps) {
     const [query, setQuery] = useState('');
