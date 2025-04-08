@@ -8,7 +8,7 @@ import githubIcon from '../../assets/githubIcon.png'
 import linkedinIcon from '../../assets/linkedinIcon.png'
 import xIcon from '../../assets/xIcon.png'
 import copyright from '../../assets/copyright.png'
-import Image, {StaticImageData} from "next/image";
+import Image from "next/image";
 
 export default function BlogPage({ posts }) {
     const [query, setQuery] = useState('');
