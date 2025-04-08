@@ -10,7 +10,17 @@ import xIcon from '../../assets/xIcon.png'
 import copyright from '../../assets/copyright.png'
 import Image from "next/image";
 
-export default function BlogPage({ posts }) {
+type BlogPageProps = {
+    posts: {
+        slug: any;
+        frontMatter: {
+            [key: string]: any;
+        };
+        content: string;
+    }[];
+  };
+
+export default function BlogPage({ posts } : BlogPageProps) {
     const [query, setQuery] = useState('');
     const [page, setPage] = useState(1);
     const [activeTab, setActiveTab] = useState('All');
