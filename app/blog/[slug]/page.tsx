@@ -35,7 +35,7 @@ export default async function Post(props: PageParams) {
   const { frontMatter, content } = post;
 
   return (
-    <div className=" mx-auto py-8 px-4 bg-white text-black flex flex-col justify-center align-center items-center">
+    <div className=" mx-auto py-8 px-4 bg-white text-black flex flex-col justify-center align-center items-center min-h-screen">
       <h1 className="text-3xl font-bold mb-2">{frontMatter.title}</h1>
       <p className="text-gray-500 mb-8">By {frontMatter.author} on {frontMatter.date}</p>
       <article className="prose lg:prose-xl">
