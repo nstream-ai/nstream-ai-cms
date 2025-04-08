@@ -8,6 +8,7 @@ import githubIcon from '../../assets/githubIcon.png'
 import linkedinIcon from '../../assets/linkedinIcon.png'
 import xIcon from '../../assets/xIcon.png'
 import copyright from '../../assets/copyright.png'
+import up from '../../assets/up.png'
 import Image from "next/image";
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
@@ -19,10 +20,21 @@ type BlogPageProps = {
         };
         content: string;
     }[];
-  };
-  /* eslint-disable @typescript-eslint/no-explicit-any */
+};
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
-export default function BlogPage({ posts } : BlogPageProps) {
+const SocialIcons = () => {
+    return (
+        <div className='flex gap-[40px]'>
+            <Image src={fbIcon} alt='fbIcon' className='w-[12px] h-[18px]' />
+            <Image src={linkedinIcon} alt='linkedinIcon' className='w-[16px] h-[18px]' />
+            <Image src={githubIcon} alt='githubIcon' className='w-[16px] h-[18px]' />
+            <Image src={xIcon} alt='xIcon' className='w-[16px] h-[18px]' />
+        </div>
+    )
+}
+
+export default function BlogPage({ posts }: BlogPageProps) {
     const [query, setQuery] = useState('');
     const [page, setPage] = useState(1);
     const [activeTab, setActiveTab] = useState('All');
@@ -53,10 +65,10 @@ export default function BlogPage({ posts } : BlogPageProps) {
     return (
         <div className="mx-auto pt-8 px-4 bg-white min-h-screen flex flex-col justify-between">
             {/* Header */}
-            <div className="flex justify-around items-center">
-                <div><p className='text-[48px] text-[#474747]'>Meliora</p></div>
-                <div className="flex justify-around items-center gap-[80px]">
-                    <div className="flex gap-[40px] text-[16px] text-[#474747] relative">
+            <div className="flex justify-around flex-col sm:flex-row items-center">
+                <div className='w-[29%] flex justify-center'><p className='text-[48px] text-[#474747]'>Meliora</p></div>
+                <div className="flex justify-around w-[72%] items-center gap-[80px]">
+                    <div className="flex hidden sm:flex gap-[80px] text-[16px] text-[#474747] relative">
                         {['Home', 'Blog', 'Contact us', 'More'].map((tab) => (
                             <button
                                 key={tab}
@@ -73,7 +85,7 @@ export default function BlogPage({ posts } : BlogPageProps) {
 
                     <div className='relative'>
                         <input
-                            className='border border-1 h-[40px] bg-[#F4F4F4] rounded-sm placeholder-[#474747] pl-4'
+                            className='border border-1 h-[40px] bg-[#F4F4F4] w-full sm:w-[200px] rounded-sm placeholder-[#474747] pl-4'
                             placeholder='Search'
                             value={query}
                             onChange={(e) => {
@@ -88,106 +100,140 @@ export default function BlogPage({ posts } : BlogPageProps) {
                 </div>
             </div>
 
-            {/* Posts */}
-            <div className='w-full flex flex-col items-center mt-[80px]'>
-                <div className='px-[20%] w-full'>
-                    <div><p className='text-black font-normal text-2xl'>Recent Posts</p></div>
-
-                    {/* Tabs */}
-                    <div className="mt-4 relative">
-                        {/* Horizontal line below tabs */}
-                        <div className="absolute left-0 right-0 top-full h-[1px] bg-gray-300 z-0" />
-
-                        <div className="flex gap-6 relative z-10">
-                            {['All', 'Design Theory', 'Tech', 'User Interface'].map((tab) => (
-                                <button
-                                    key={tab}
-                                    onClick={() => {
-                                        setActiveTab(tab);
-                                        setPage(1);
-                                    }}
-                                    className={`relative px-1 pb-2 text-sm font-medium ${activeTab === tab ? 'text-[#474747]' : 'text-gray-500 hover:text-[#474747]'
-                                        }`}
-                                >
-                                    {tab}
-
-                                    {/* Underline only on active tab */}
-                                    {activeTab === tab && (
-                                        <span className="absolute left-0 bottom-[-1px] w-full h-[3px] bg-[#474747] rounded-full" />
-                                    )}
-                                </button>
-                            ))}
+            <div className='flex flex-col sm:flex-row justify-center'>
+                <div className=' w-[60%] flex flex-col items-center'>
+                    <div className='hidden -[60%] justify-start ml-[0%] sm:flex sm:flex-col gap-[10px] items-start mt-[8%]'>
+                        <div>
+                            <p className='text-[24px] font-normal text-[#474747]'>What I do!</p>
                         </div>
-                    </div>
-
-
-                    {/* Post List */}
-                    <div className='mt-[20px]'>
-                        <ul className="space-y-0">
-                            {currentPagePosts.map((post) => (
-                                <li key={post.slug} className="border-b-2 p-4 py-8 flex flex-col rounded-md ">
-                                    <p className='my-4 text-[#777777] text-xs'>{post.frontMatter.date}</p>
-                                    <Link href={`/blog/${post.slug}`} className="text-xl font-normal text-[#474747] hover:text-grey-600">
-                                        {post.frontMatter.title}
-                                    </Link>
-                                </li>
-                            ))}
-                            {currentPagePosts.length === 0 && (
-                                <p className="text-center text-[#777777] mt-10">No posts found.</p>
-                            )}
-                        </ul>
-                    </div>
-
-                    {/* Pagination */}
-                    {maxPage > 1 && (
-                        <div className="flex justify-start items-center gap-2 mt-8">
+                        <div className='text-[16px] font-normal text-[#474747] w-[300px] mt-[4%]'>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer aliquet, orci in bibendum luctus, turpis ante pretium velit, eu rutrum augue erat ac eros. Cras ultricies mattis convallis.</p>
+                        </div>
+                        <div className='flex gap-[20px] items-center text-[12px] font-normal text-[#474747] mt-[3%]'>
+                            <p>EXPLORE ME</p>
                             <button
-                                onClick={handlePrevPage}
-                                disabled={page === 1}
-                                className="px-3 py-2 border rounded-sm text-[#474747] hover:bg-gray-100 disabled:opacity-30"
-                            >
-                                {'<'}
-                            </button>
-                            {[...Array(maxPage)].map((_, index) => {
-                                const pageNum = index + 1;
-                                return (
-                                    <button
-                                        key={pageNum}
-                                        onClick={() => setPage(pageNum)}
-                                        className={`px-4 py-2 ${page === pageNum
-                                            ? 'text-[#FFBA9D]'
-                                            : 'bg-white text-[#474747] border-[#474747] hover:bg-[#f0f0f0]'
-                                            }`}
-                                    >
-                                        {pageNum}
-                                    </button>
-                                );
-                            })}
-                            <button
-                                onClick={handleNextPage}
-                                disabled={page === maxPage}
-                                className="px-3 py-2 border rounded-sm text-[#474747] hover:bg-gray-100 disabled:opacity-30"
+                                className="px-0 py-2 bg-[#F4F4F4] w-[20px] h-[20px] flex justify-center items-center rounded-sm text-[#474747] hover:bg-gray-100 disabled:opacity-30"
                             >
                                 {'>'}
                             </button>
                         </div>
-                    )}
+                        <div className='mt-[4%]'>
+                            <SocialIcons />
+                        </div>
+                    </div>
+                </div>
+                {/* Posts */}
+                <div className='w-full flex flex-col items-center mt-[60px]'>
+                    <div className='pr-[10%] w-full'>
+                        <div><p className='text-black font-normal text-2xl'>Recent Posts</p></div>
+
+                        {/* Tabs */}
+                        <div className="mt-4 relative">
+                            {/* Horizontal line below tabs */}
+                            <div className="absolute left-0 right-0 top-full h-[1px] bg-gray-300 z-0" />
+
+                            <div className="flex gap-6 relative z-10">
+                                {['All', 'Design Theory', 'Tech', 'User Interface'].map((tab) => (
+                                    <button
+                                        key={tab}
+                                        onClick={() => {
+                                            setActiveTab(tab);
+                                            setPage(1);
+                                        }}
+                                        className={`relative px-1 pb-2 text-sm font-medium ${activeTab === tab ? 'text-[#474747]' : 'text-gray-500 hover:text-[#474747]'
+                                            }`}
+                                    >
+                                        {tab}
+
+                                        {/* Underline only on active tab */}
+                                        {activeTab === tab && (
+                                            <span className="absolute left-0 bottom-[-1px] w-full h-[3px] bg-[#474747] rounded-full" />
+                                        )}
+                                    </button>
+                                ))}
+                            </div>
+                        </div>
+
+
+                        {/* Post List */}
+                        <div className='mt-[20px]'>
+                            <ul className="space-y-0">
+                                {currentPagePosts.map((post) => (
+                                    <li key={post.slug} className="border-b-2 p-4 py-8 flex flex-col rounded-md ">
+                                        <p className='my-4 text-[#777777] text-xs'>{post.frontMatter.date}</p>
+                                        <Link href={`/blog/${post.slug}`} className="text-xl font-normal text-[#474747] hover:text-grey-600">
+                                            {post.frontMatter.title}
+                                        </Link>
+                                    </li>
+                                ))}
+                                {currentPagePosts.length === 0 && (
+                                    <p className="text-center text-[#777777] mt-10">No posts found.</p>
+                                )}
+                            </ul>
+                        </div>
+
+                        {/* Pagination */}
+                        {maxPage > 1 && (
+                            <div className="flex justify-start items-center gap-2 mt-8">
+                                <button
+                                    onClick={handlePrevPage}
+                                    disabled={page === 1}
+                                    className="px-3 py-2 border rounded-sm text-[#474747] hover:bg-gray-100 disabled:opacity-30"
+                                >
+                                    {'<'}
+                                </button>
+                                {[...Array(maxPage)].map((_, index) => {
+                                    const pageNum = index + 1;
+                                    return (
+                                        <button
+                                            key={pageNum}
+                                            onClick={() => setPage(pageNum)}
+                                            className={`px-4 py-2 ${page === pageNum
+                                                ? 'text-[#FFBA9D]'
+                                                : 'bg-white text-[#474747] border-[#474747] hover:bg-[#f0f0f0]'
+                                                }`}
+                                        >
+                                            {pageNum}
+                                        </button>
+                                    );
+                                })}
+                                <button
+                                    onClick={handleNextPage}
+                                    disabled={page === maxPage}
+                                    className="px-3 py-2 border rounded-sm text-[#474747] hover:bg-gray-100 disabled:opacity-30"
+                                >
+                                    {'>'}
+                                </button>
+                            </div>
+                        )}
+                    </div>
+                </div>
+                <div className='sm:hidden -[60%] justify-start sm:ml-[16%] sm:flex sm:flex-col gap-[10px] items-start mt-[8%]'>
+                    <div>
+                        <p className='text-[24px] font-normal text-[#474747]'>What I do!</p>
+                    </div>
+                    <div className='text-[16px] font-normal text-[#474747] w-[300px] mt-[4%]'>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer aliquet, orci in bibendum luctus, turpis ante pretium velit, eu rutrum augue erat ac eros. Cras ultricies mattis convallis.</p>
+                    </div>
+                    <div className='flex gap-[20px] text-[12px] font-normal text-[#474747] mt-[3%]'>
+                        <p>EXPLORE ME</p>
+                        <p>icon</p>
+                    </div>
+                    <div className='mt-[4%]'>
+                        <SocialIcons />
+                    </div>
                 </div>
             </div>
 
             {/* Footer */}
-            <div className='flex justify-between px-[10%] items-center bg-[#F4F4F4] py-[20px]'>
+            <div className='flex flex-col sm:flex-row justify-between z-10 px-[10%] mt-[32px] sm:mt-12 gap-[10px] sm:gap-0 items-center bg-[#F4F4F4] py-[30px] relative'>
                 <div className='flex text-[#474747] items-center gap-[4px]'>
                     <p>Copyright</p>
-                    <Image src={copyright} alt='copyright' className='w-[16px] h-[14px]'/>
+                    <Image src={copyright} alt='copyright' className='w-[16px] h-[14px]' />
                     <p>2020 Meliora, Inc</p>
                 </div>
-                <div className='flex gap-[40px]'>
-                    <Image src={fbIcon} alt='fbIcon' className='w-[12px] h-[18px]' />
-                    <Image src={linkedinIcon} alt='linkedinIcon' className='w-[16px] h-[18px]'/>
-                    <Image src={githubIcon} alt='githubIcon' className='w-[16px] h-[18px]'/>
-                    <Image src={xIcon} alt='xIcon' className='w-[16px] h-[18px]'/>
-                </div>
+                <div className='absolute left-[46%] right-[50%] -top-3 z-50 bg-white w-[30px] h-[30px] flex justify-center items-center rounded-full'><Image src={up} alt="up" /></div>
+                <SocialIcons />
             </div>
         </div>
     );
