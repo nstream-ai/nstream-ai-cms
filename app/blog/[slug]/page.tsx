@@ -94,6 +94,8 @@ const ContentBlockRenderer = ({ block }: { block: ContentBlock }) => {
           <Image
             src={block.src}
             alt={block.alt || ''}
+            width={900}
+            height={600}
             className="rounded-lg w-full max-w-[936px]"
           />
           {block.caption && (
@@ -171,15 +173,15 @@ export default async function Post(props: PageParams) {
   const { frontMatter, content } = post;
 
   return (
-    <div className="mx-auto pt-8 px-4 bg-white text-black flex flex-col justify-between align-center items-center min-h-screen">
+    <div className="mx-auto pt-8 px-4 bg-[#FCFCF8] text-black flex flex-col justify-between align-center items-center min-h-screen">
       {/* Header */}
       <div className="flex justify-around flex-col sm:flex-row gap-[20px] sm:gap-[0px] items-center w-full">
-        <div className='w-full sm:w-[29%] h-[40px] items-center gap-[10px] flex justify-center'>
+        <div className='w-full sm:w-fit px-3 py-6 rounded-md h-[40px] bg-[#f8f6f4] items-center gap-[10px] flex justify-center'>
           <Image src={nstreamLogo} alt='nstreamLogo' />
-          <p className='text-[16px] sm:text-[24px] sm:text-[44px] text-[#474747]'>Nstream AI</p>
+          <p className='text-[16px] sm:text-[20px] font-medium text-[#474747]'>Nstream AI</p>
         </div>
         <div className="flex justify-around w-full sm:w-[50%] items-center gap-[80px]">
-          <div className='relative sm:mt-0 mt-[10px] w-full sm:w-[400px]'>
+          {/* <div className='relative sm:mt-0 mt-[10px] w-full sm:w-[400px]'>
             <input
               className='h-[40px] bg-[#F4F4F4] w-full sm:w-[400px] rounded-sm placeholder-[#474747] pl-4'
               placeholder='Search'
@@ -187,7 +189,7 @@ export default async function Post(props: PageParams) {
             <button className='absolute top-0 right-0 bg-[#FFBA9D] w-[40px] h-[40px] rounded-sm flex justify-center items-center'>
               <Image src={searchIcon} alt='searchIcon' className='h-[16px] w-[16px]' />
             </button>
-          </div>
+          </div> */}
         </div>
       </div>
 
@@ -204,7 +206,7 @@ export default async function Post(props: PageParams) {
         {/* Hero Image */}
         {frontMatter.heroImage && (
           <div className="my-2 flex justify-center w-full">
-            <Image
+            <img
               src={frontMatter.heroImage}
               alt={frontMatter.title}
               className="rounded-lg w-full h-auto max-h-[400px] object-cover"

@@ -69,12 +69,12 @@ export default function BlogPage({ posts }: BlogPageProps) {
         <div className="mx-auto pt-8 px-4 min-h-screen flex flex-col justify-between bg-[#FCFCF8]">
             {/* Header */}
             <div className="flex justify-around flex-col sm:flex-row gap-[20px] sm:gap-[0px] items-center w-full">
-                <div className='w-full sm:w-[29%] h-[40px] items-center gap-[10px] flex justify-center'>
+                <div className='w-full sm:w-fit px-3 py-6 rounded-md h-[40px] bg-[#f8f6f4] items-center gap-[10px] flex justify-center'>
                     <Image src={nstreamLogo} alt='nstreamLogo' />
-                    <p className='text-[16px] sm:text-[24px] sm:text-[44px] text-[#474747]'>Nstream AI</p>
+                    <p className='text-[16px] sm:text-[20px] font-medium text-[#474747]'>Nstream AI</p>
                 </div>
                 <div className="flex justify-around w-full sm:w-[50%] items-center gap-[80px]">
-                    <div className='relative sm:mt-0 mt-[10px] w-full sm:w-[400px]'>
+                    {/* <div className='relative sm:mt-0 mt-[10px] w-full sm:w-[400px]'>
                         <input
                             className='h-[40px] bg-[#F4F4F4] w-full sm:w-[400px] rounded-sm placeholder-[#474747] pl-4'
                             placeholder='Search'
@@ -84,7 +84,7 @@ export default function BlogPage({ posts }: BlogPageProps) {
                         <button className='absolute top-0 right-0 bg-[#FFBA9D] w-[40px] h-[40px] rounded-sm flex justify-center items-center'>
                             <Image src={searchIcon} alt='searchIcon' className='h-[16px] w-[16px]' />
                         </button>
-                    </div>
+                    </div> */}
                 </div>
             </div>
 
