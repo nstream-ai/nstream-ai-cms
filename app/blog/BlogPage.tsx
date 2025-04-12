@@ -3,13 +3,10 @@
 import Link from 'next/link';
 import searchIcon from '../../assets/searchIcon.png';
 import { useState } from 'react';
-import fbIcon from '../../assets/fbIcon.png'
-import githubIcon from '../../assets/githubIcon.png'
-import linkedinIcon from '../../assets/linkedinIcon.png'
-import xIcon from '../../assets/xIcon.png'
 import copyright from '../../assets/copyright.png'
 import up from '../../assets/up.png'
 import Image from "next/image";
+import SocialIcons from '../SocialIcons';
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 type BlogPageProps = {
@@ -22,17 +19,6 @@ type BlogPageProps = {
     }[];
 };
 /* eslint-disable @typescript-eslint/no-explicit-any */
-
-const SocialIcons = () => {
-    return (
-        <div className='flex gap-[40px]'>
-            <Image src={fbIcon} alt='fbIcon' className='w-[12px] h-[18px]' />
-            <Image src={linkedinIcon} alt='linkedinIcon' className='w-[16px] h-[18px]' />
-            <Image src={githubIcon} alt='githubIcon' className='w-[16px] h-[18px]' />
-            <Image src={xIcon} alt='xIcon' className='w-[16px] h-[18px]' />
-        </div>
-    )
-}
 
 export default function BlogPage({ posts }: BlogPageProps) {
     const [query, setQuery] = useState('');
@@ -67,25 +53,11 @@ export default function BlogPage({ posts }: BlogPageProps) {
             {/* Header */}
             <div className="flex justify-around flex-col sm:flex-row items-center">
                 <div className='w-[29%] flex justify-center'><p className='text-[48px] text-[#474747]'>Meliora</p></div>
-                <div className="flex justify-around w-[72%] items-center gap-[80px]">
-                    <div className="flex hidden sm:flex gap-[80px] text-[16px] text-[#474747] relative">
-                        {['Home', 'Blog', 'Contact us', 'More'].map((tab) => (
-                            <button
-                                key={tab}
-                                onClick={() => setMainTab(tab)}
-                                className={`relative pb-1 font-medium ${mainTab === tab ? 'text-[#474747]' : 'text-gray-500 hover:text-[#474747]'}`}
-                            >
-                                {tab}
-                                {mainTab === tab && (
-                                    <span className="absolute left-0 bottom-[-2px] w-full h-[2px] bg-[#474747] rounded-full" />
-                                )}
-                            </button>
-                        ))}
-                    </div>
+                <div className="flex justify-around w-[50%] items-center gap-[80px]">
 
                     <div className='relative'>
                         <input
-                            className='border border-1 h-[40px] bg-[#F4F4F4] w-full sm:w-[200px] rounded-sm placeholder-[#474747] pl-4'
+                            className='border border-1 h-[40px] bg-[#F4F4F4] w-full sm:w-[00px] rounded-sm placeholder-[#474747] pl-4'
                             placeholder='Search'
                             value={query}
                             onChange={(e) => {
@@ -101,8 +73,8 @@ export default function BlogPage({ posts }: BlogPageProps) {
             </div>
 
             <div className='flex flex-col sm:flex-row justify-center'>
-                <div className=' w-[60%] flex flex-col items-center'>
-                    <div className='hidden -[60%] justify-start ml-[0%] sm:flex sm:flex-col gap-[10px] items-start mt-[8%]'>
+                <div className=' w-[40%] flex flex-col items-center'>
+                    {/* <div className='hidden -[60%] justify-start ml-[0%] sm:flex sm:flex-col gap-[10px] items-start mt-[8%]'>
                         <div>
                             <p className='text-[24px] font-normal text-[#474747]'>What I do!</p>
                         </div>
@@ -120,7 +92,7 @@ export default function BlogPage({ posts }: BlogPageProps) {
                         <div className='mt-[4%]'>
                             <SocialIcons />
                         </div>
-                    </div>
+                    </div> */}
                 </div>
                 {/* Posts */}
                 <div className='w-full flex flex-col items-center mt-[60px]'>
@@ -232,7 +204,6 @@ export default function BlogPage({ posts }: BlogPageProps) {
                     <Image src={copyright} alt='copyright' className='w-[16px] h-[14px]' />
                     <p>2020 Meliora, Inc</p>
                 </div>
-                <div className='absolute left-[46%] right-[50%] -top-3 z-50 bg-white w-[30px] h-[30px] flex justify-center items-center rounded-full'><Image src={up} alt="up" /></div>
                 <SocialIcons />
             </div>
         </div>
