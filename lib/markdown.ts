@@ -1,11 +1,9 @@
 import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
-import { remark } from 'remark';
-import html from 'remark-html';
 
 // Import your Post type and content block interfaces
-import { Post, PostFrontMatter, ContentBlock, TextBlock, ImageBlock, VideoBlock, QuoteBlock, HeadingBlock, ListBlock } from '../types/blog'; // Adjust the import path as needed
+import { Post, PostFrontMatter, ContentBlock } from '../types/blog'; // Adjust the import path as needed
 
 const postsDirectory = path.join(process.cwd(), 'content', 'posts');
 

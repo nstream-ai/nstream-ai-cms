@@ -91,7 +91,7 @@ const ContentBlockRenderer = ({ block }: { block: ContentBlock }) => {
     case 'image':
       return (
         <div className="my-6 flex flex-col items-center">
-          <img
+          <Image
             src={block.src}
             alt={block.alt || ''}
             className="rounded-lg w-full max-w-[936px]"
@@ -204,7 +204,7 @@ export default async function Post(props: PageParams) {
         {/* Hero Image */}
         {frontMatter.heroImage && (
           <div className="my-2 flex justify-center w-full">
-            <img
+            <Image
               src={frontMatter.heroImage}
               alt={frontMatter.title}
               className="rounded-lg w-full h-auto max-h-[400px] object-cover"
