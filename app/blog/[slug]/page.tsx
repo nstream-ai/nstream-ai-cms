@@ -4,13 +4,11 @@ import PostContent from './PostContent'; // We'll extract the Post component to 
 import { Metadata } from 'next';
 
 interface PageParams {
-  params: {
-    slug: string;
-  };
+  params: Promise<{slug: string}>;
 }
 
 export async function generateMetadata({ params }: PageParams): Promise<Metadata> {
-  const post = await getPostBySlug(params.slug);
+  const post = await getPostBySlug((await params).slug);
   return generatePostMetadata(post);
 }
 
@@ -22,7 +20,7 @@ export async function generateStaticParams() {
 }
 
 export default async function Post({ params }: PageParams) {
-  const { slug } = params;
+  const { slug } = await params;
   const post = await getPostBySlug(slug);
   
   // Generate JSON-LD structured data for the blog post

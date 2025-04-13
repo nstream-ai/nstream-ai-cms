@@ -1,7 +1,6 @@
 'use client';
 
 import Link from 'next/link';
-import searchIcon from '../../assets/searchIcon.png';
 import { useState, useEffect, Key } from 'react';
 import nstreamLogo from '../../assets/nstreamLogo.png'
 import Image from "next/image";
@@ -20,7 +19,6 @@ type BlogPageProps = {
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 export default function BlogPage({ posts }: BlogPageProps) {
-    const [query, setQuery] = useState('');
     const [page, setPage] = useState(1);
     const [activeTab, setActiveTab] = useState('All');
     const [categories, setCategories] = useState<string[]>(['All']);
@@ -42,9 +40,8 @@ export default function BlogPage({ posts }: BlogPageProps) {
 
     // Filter posts based on query and selected tab
     const filteredPosts = posts?.filter((post) => {
-        const matchesQuery = post.frontMatter.title.toLowerCase().includes(query.toLowerCase());
         const matchesTab = activeTab === 'All' || post.frontMatter.category === activeTab;
-        return matchesQuery && matchesTab;
+        return matchesTab;
     }) || [];
 
     const maxPage = Math.ceil(filteredPosts.length / postsPerPage);
@@ -58,11 +55,6 @@ export default function BlogPage({ posts }: BlogPageProps) {
 
     const handlePrevPage = () => {
         if (page > 1) setPage((prev) => prev - 1);
-    };
-
-    const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setQuery(e.target.value);
-        setPage(1); // Reset to first page when searching
     };
 
     return (
