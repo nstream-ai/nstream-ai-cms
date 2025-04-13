@@ -1,10 +1,14 @@
-// app/blog/page.tsx
 import { getAllPosts } from '../../lib/markdown';
 import BlogPage from './BlogPage';
+import { generateMetadata as genMetadata } from '@/lib/metadata';
+
+export const metadata = genMetadata({
+  title: 'Blog',
+  description: 'Explore the latest articles, insights and updates from Nstream AI',
+  url: '/blog',
+});
 
 export default async function Page() {
-  // Await the posts to resolve the Promise before passing to BlogPage
   const posts = await getAllPosts();
-  
   return <BlogPage posts={posts} />;
 }
