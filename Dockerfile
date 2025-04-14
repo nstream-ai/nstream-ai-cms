@@ -30,8 +30,8 @@ WORKDIR /app
 
 ENV NODE_ENV=production
 
-# Optional for next/image optimization
-RUN apk add --no-cache sharp
+# # Optional for next/image optimization
+# RUN apk add --no-cache sharp
 
 # Install PM2
 RUN npm install -g pm2
