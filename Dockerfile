@@ -41,6 +41,8 @@ COPY --from=builder /app/public ./public
 COPY --from=builder /app/.next ./.next
 COPY --from=builder /app/node_modules ./node_modules
 COPY --from=builder /app/package.json ./package.json
+COPY --from=builder /app/content ./content
+COPY --from=builder /app/assets ./assets
 
 # PM2 config (optional, can use inline too)
 COPY ecosystem.config.js ./
