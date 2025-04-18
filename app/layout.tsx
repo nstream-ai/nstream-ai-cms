@@ -23,14 +23,14 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  metadataBase: new URL(siteConfig.url),
+  metadataBase: new URL("https://blog.nstream.ai"),
   title: {
     default: "Nstream AI Blog - AI & Machine Learning Insights",
     template: "%s | Nstream AI",
   },
-  description: siteConfig.description,
-  applicationName: siteConfig.name,
-  authors: [{ name: siteConfig.name }],
+  description: "Explore the latest insights on AI, machine learning, and technology from Nstream AI. Stay updated with our expert analysis and industry trends.",
+  applicationName: "Nstream AI Blog",
+  authors: [{ name: "Nstream AI" }],
   generator: "Next.js",
   keywords: ["AI", "Machine Learning", "Technology", "Artificial Intelligence", "Tech Blog", "Nstream AI"],
   referrer: "origin-when-cross-origin",
@@ -41,15 +41,15 @@ export const metadata: Metadata = {
   manifest: "/manifest.json",
   openGraph: {
     type: "website",
-    siteName: siteConfig.name,
+    siteName: "Nstream AI Blog",
     title: "Nstream AI Blog - AI & Machine Learning Insights",
-    description: siteConfig.description,
+    description: "Explore the latest insights on AI, machine learning, and technology from Nstream AI. Stay updated with our expert analysis and industry trends.",
     images: [
       {
-        url: siteConfig.ogImage,
+        url: "/images/nstream-og-image.jpg",
         width: 1200,
         height: 630,
-        alt: siteConfig.name,
+        alt: "Nstream AI Blog",
       },
     ],
     locale: "en_US",
@@ -59,8 +59,8 @@ export const metadata: Metadata = {
     site: "@NstreamAI",
     creator: "@NstreamAI",
     title: "Nstream AI Blog - AI & Machine Learning Insights",
-    description: siteConfig.description,
-    images: [siteConfig.ogImage],
+    description: "Explore the latest insights on AI, machine learning, and technology from Nstream AI. Stay updated with our expert analysis and industry trends.",
+    images: ["/images/nstream-og-image.jpg"],
   },
   robots: {
     index: true,
@@ -72,9 +72,6 @@ export const metadata: Metadata = {
       'max-image-preview': 'large',
       'max-snippet': -1,
     },
-  },
-  verification: {
-    google: siteConfig.metadata.googleSiteVerification,
   },
 };
 
