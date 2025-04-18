@@ -5,10 +5,17 @@ import { useState, useEffect, Key } from 'react';
 import nstreamLogo from '../../assets/nstreamLogo.png'
 import Image from "next/image";
 import Footer from '../Footer';
-import { Post } from '@/types/blog';
+import { Post, PostFrontMatter } from '@/types/blog';
+
+// Create a type for blog listing that doesn't require content
+type BlogPost = {
+    slug: string;
+    frontMatter: PostFrontMatter;
+    content?: Post['content'];
+};
 
 interface BlogPageProps {
-    posts: Post[];
+    posts: BlogPost[];
 }
 
 export default function BlogPage({ posts }: BlogPageProps) {
