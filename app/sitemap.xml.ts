@@ -2,7 +2,7 @@ import { getAllPosts } from '@/lib/markdown';
 import { MetadataRoute } from 'next';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const baseUrl = 'https://yourdomain.com'; // Replace with your actual domain
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://nstream-ai-cms.vercel.app';
   const posts = await getAllPosts();
   
   const blogPostsUrls = posts.map((post) => ({

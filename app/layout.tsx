@@ -12,8 +12,11 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+// Get the base URL from environment variable or fallback
+const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://nstream-ai-cms.vercel.app';
+
 export const metadata: Metadata = {
-  metadataBase: new URL("https://yourdomain.com"), // Replace with your actual domain
+  metadataBase: new URL(baseUrl),
   title: {
     default: "Nstream AI Blog",
     template: "%s | Nstream AI",
@@ -23,13 +26,13 @@ export const metadata: Metadata = {
     icon: "/favicon.ico",
   },
   openGraph: {
-    type: "website", // This is now a valid literal
+    type: "website",
     siteName: "Nstream AI Blog",
     title: "Nstream AI Blog",
     description: "Insights and updates from Nstream AI",
     images: [
       {
-        url: "/og-image.jpg", // Create this image in your public folder
+        url: "/og-image.jpg",
         width: 1200,
         height: 630,
         alt: "Nstream AI Blog",
