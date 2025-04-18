@@ -5,18 +5,11 @@ import { useState, useEffect, Key } from 'react';
 import nstreamLogo from '../../assets/nstreamLogo.png'
 import Image from "next/image";
 import Footer from '../Footer';
+import { Post } from '@/types/blog';
 
-/* eslint-disable @typescript-eslint/no-explicit-any */
-type BlogPageProps = {
-    posts: {
-        slug: any;
-        frontMatter: {
-            [key: string]: any;
-        };
-        content?: string;
-    }[];
-};
-/* eslint-disable @typescript-eslint/no-explicit-any */
+interface BlogPageProps {
+    posts: Post[];
+}
 
 export default function BlogPage({ posts }: BlogPageProps) {
     const [page, setPage] = useState(1);

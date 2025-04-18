@@ -1,7 +1,16 @@
-type StructuredDataProps = {
+type JsonValue = string | number | boolean | null | JsonValue[] | { [key: string]: JsonValue };
+
+interface StructuredDataProps {
   type: 'BlogPosting' | 'WebSite' | 'Organization';
-  data: Record<string, any>;
-};
+  data: {
+    name?: string;
+    url?: string;
+    logo?: string;
+    description?: string;
+    sameAs?: string[];
+    [key: string]: JsonValue | undefined;
+  };
+}
 
 export default function StructuredData({ type, data }: StructuredDataProps) {
   const structuredData = {
