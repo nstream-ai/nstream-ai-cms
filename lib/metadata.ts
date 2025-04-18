@@ -15,7 +15,7 @@ type SEOProps = {
 const siteConfig = {
   name: 'Nstream AI Blog',
   description: 'Explore the latest insights on AI, machine learning, and technology from Nstream AI. Stay updated with our expert analysis and industry trends.',
-  url: 'https://nstream.ai', // Update this with your actual domain
+  url: 'https://blog.nstream.ai', // Update this with your actual domain
   ogImage: '/images/nstream-og-image.jpg', // Default OG image
   twitterHandle: '@NstreamAI', // Add your Twitter handle
   locale: 'en_US',

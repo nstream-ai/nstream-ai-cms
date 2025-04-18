@@ -5,7 +5,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // Get all blog posts
   const posts = getAllPostSlugs();
   const blogPosts = posts.map((post) => ({
-    url: `https://nstream.ai/blog/${post.slug}`,
+    url: `https://blog.nstream.ai/blog/${post.slug}`,
     lastModified: new Date(),
     changeFrequency: 'monthly' as const,
     priority: 0.8,
@@ -14,13 +14,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // Add static pages
   const staticPages = [
     {
-      url: 'https://nstream.ai',
+      url: 'https://blog.nstream.ai',
       lastModified: new Date(),
       changeFrequency: 'daily' as const,
       priority: 1,
     },
     {
-      url: 'https://nstream.ai/blog',
+      url: 'https://blog.nstream.ai/blog',
       lastModified: new Date(),
       changeFrequency: 'daily' as const,
       priority: 0.9,

@@ -3,7 +3,7 @@ User-agent: *
 Allow: /
 
 # Sitemap location
-Sitemap: https://nstream.ai/sitemap.xml
+Sitemap: https://blog.nstream.ai/sitemap.xml
 
 # Prevent crawling of admin or internal pages if they exist
 Disallow: /admin/
