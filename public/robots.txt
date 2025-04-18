@@ -1,0 +1,14 @@
+# Allow all crawlers
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://nstream.ai/sitemap.xml
+
+# Prevent crawling of admin or internal pages if they exist
+Disallow: /admin/
+Disallow: /internal/
+Disallow: /api/
+
+# Optimize crawl rate
+Crawl-delay: 10 

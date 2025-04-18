@@ -1,6 +1,8 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import StructuredData from "./components/StructuredData";
+import { siteConfig } from "@/config/site";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -12,36 +14,67 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+export const viewport: Viewport = {
+  themeColor: "#ffffff",
+  colorScheme: "light",
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+};
+
 export const metadata: Metadata = {
-  metadataBase: new URL("https://yourdomain.com"), // Replace with your actual domain
+  metadataBase: new URL(siteConfig.url),
   title: {
-    default: "Nstream AI Blog",
+    default: "Nstream AI Blog - AI & Machine Learning Insights",
     template: "%s | Nstream AI",
   },
-  description: "Insights and updates from Nstream AI",
+  description: siteConfig.description,
+  applicationName: siteConfig.name,
+  authors: [{ name: siteConfig.name }],
+  generator: "Next.js",
+  keywords: ["AI", "Machine Learning", "Technology", "Artificial Intelligence", "Tech Blog", "Nstream AI"],
+  referrer: "origin-when-cross-origin",
   icons: {
     icon: "/favicon.ico",
+    apple: "/apple-touch-icon.png",
   },
+  manifest: "/manifest.json",
   openGraph: {
-    type: "website", // This is now a valid literal
-    siteName: "Nstream AI Blog",
-    title: "Nstream AI Blog",
-    description: "Insights and updates from Nstream AI",
+    type: "website",
+    siteName: siteConfig.name,
+    title: "Nstream AI Blog - AI & Machine Learning Insights",
+    description: siteConfig.description,
     images: [
       {
-        url: "/og-image.jpg", // Create this image in your public folder
+        url: siteConfig.ogImage,
         width: 1200,
         height: 630,
-        alt: "Nstream AI Blog",
+        alt: siteConfig.name,
       },
     ],
     locale: "en_US",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Nstream AI Blog",
-    description: "Insights and updates from Nstream AI",
-    images: ["/og-image.jpg"],
+    site: "@NstreamAI",
+    creator: "@NstreamAI",
+    title: "Nstream AI Blog - AI & Machine Learning Insights",
+    description: siteConfig.description,
+    images: [siteConfig.ogImage],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
+  verification: {
+    google: siteConfig.metadata.googleSiteVerification,
   },
 };
 
@@ -50,11 +83,24 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const organizationData = {
+    name: siteConfig.name,
+    url: siteConfig.url,
+    logo: `${siteConfig.url}${siteConfig.ogImage}`,
+    sameAs: [
+      siteConfig.links.twitter,
+      siteConfig.links.linkedin,
+      siteConfig.links.github,
+    ].filter(Boolean),
+  };
+
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+      <head>
+        <link rel="canonical" href={siteConfig.url} />
+        <StructuredData type="Organization" data={organizationData} />
+      </head>
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         {children}
       </body>
     </html>
