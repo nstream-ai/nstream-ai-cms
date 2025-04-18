@@ -2,6 +2,8 @@ import { getAllPostSlugs, getPostBySlug } from '@/lib/markdown';
 import { generatePostMetadata } from '@/lib/metadata';
 import PostContent from './PostContent'; // We'll extract the Post component to a separate file
 import { Metadata } from 'next';
+import { notFound } from 'next/navigation';
+import ContentBlockRenderer from '@/app/ContentBlockRenderer';
 
 interface PageParams {
   params: Promise<{slug: string}>;
@@ -19,11 +21,13 @@ export async function generateStaticParams() {
   }));
 }
 
-export default async function Post({ params }: PageParams) {
-  const { slug } = await params;
-  const post = await getPostBySlug(slug);
+export default async function BlogPost({ params }: { params: { slug: string } }) {
+  const post = await getPostBySlug(params.slug);
   
-  // Generate JSON-LD structured data for the blog post
+  if (!post) {
+    notFound();
+  }
+
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'BlogPosting',
@@ -32,35 +36,20 @@ export default async function Post({ params }: PageParams) {
     dateModified: post.frontMatter.date,
     author: {
       '@type': 'Person',
-      name: post.frontMatter.author,
+      name: post.frontMatter.author
     },
+    description: post.frontMatter.summary,
     image: post.frontMatter.heroImage,
-    description: post.frontMatter.summary || '',
-    publisher: {
-      '@type': 'Organization',
-      name: 'Nstream AI',
-      logo: {
-        '@type': 'ImageObject',
-        url: 'https://yourdomain.com/logo.png', // Replace with your actual logo URL
-      },
-    },
-    mainEntityOfPage: {
-      '@type': 'WebPage',
-      '@id': `https://yourdomain.com/blog/${slug}`, // Replace with your domain
-    },
-    keywords: post.frontMatter.tags?.join(', ') || '',
+    url: `${process.env.NEXT_PUBLIC_BASE_URL}/blog/${params.slug}`
   };
 
   return (
-    <>
-      {/* Add JSON-LD script */}
+    <article className="prose prose-lg mx-auto px-4 py-8">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      
-      {/* Render the post content */}
-      <PostContent post={post} />
-    </>
+      <ContentBlockRenderer content={post.content} />
+    </article>
   );
 }
