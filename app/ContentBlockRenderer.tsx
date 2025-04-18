@@ -1,4 +1,5 @@
 import { ContentBlock } from '@/types/blog';
+import Image from 'next/image';
 
 export const ContentBlockRenderer = ({ block }: { block: ContentBlock }) => {
   switch (block.type) {
@@ -8,11 +9,15 @@ export const ContentBlockRenderer = ({ block }: { block: ContentBlock }) => {
     case 'image':
       return (
         <div className="my-6 flex flex-col items-center">
-          <img
-            src={block.src}
-            alt={block.alt || ''}
-            className="rounded-lg w-full max-w-[936px]"
-          />
+          <div className="relative w-full max-w-[936px] aspect-video">
+            <Image
+              src={block.src}
+              alt={block.alt || ''}
+              fill
+              className="rounded-lg object-cover"
+              sizes="(max-width: 936px) 100vw, 936px"
+            />
+          </div>
           {block.caption && (
             <p className="text-[16px] text-[#777777] mt-2">{block.caption}</p>
           )}

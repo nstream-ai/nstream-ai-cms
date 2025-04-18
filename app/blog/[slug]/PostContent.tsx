@@ -34,11 +34,14 @@ export default function PostContent({ post }: { post: Post }) {
         
         {/* Hero Image */}
         {frontMatter.heroImage && (
-          <div className="my-2 flex justify-center w-full">
-            <img
+          <div className="relative w-full aspect-video mb-8">
+            <Image
               src={frontMatter.heroImage}
               alt={frontMatter.title}
-              className="rounded-lg w-full h-auto max-h-[400px] object-cover"
+              fill
+              className="rounded-lg object-cover"
+              sizes="(max-width: 1200px) 100vw, 1200px"
+              priority
             />
           </div>
         )}
