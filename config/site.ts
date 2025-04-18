@@ -8,7 +8,5 @@ export const siteConfig = {
     linkedin: process.env.NEXT_PUBLIC_LINKEDIN_URL || 'https://linkedin.com/company/nstream-ai',
     github: process.env.NEXT_PUBLIC_GITHUB_URL || 'https://github.com/nstream-ai',
   },
-  metadata: {
-    googleSiteVerification: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION,
-  }
+  metadata: {}
 } as const; 
