@@ -2,10 +2,15 @@ import { getAllPostSlugs, getPostBySlug } from '@/lib/markdown';
 import { generatePostMetadata } from '@/lib/metadata';
 import PostContent from './PostContent'; // We'll extract the Post component to a separate file
 import { Metadata } from 'next';
+import { siteConfig } from '@/config/site';
+import Script from 'next/script';
 
 interface PageParams {
   params: Promise<{slug: string}>;
 }
+
+const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || siteConfig.url;
+const GA_ID = process.env.NEXT_PUBLIC_GA_ID;
 
 export async function generateMetadata({ params }: PageParams): Promise<Metadata> {
   const post = await getPostBySlug((await params).slug);
@@ -23,6 +28,22 @@ export default async function Post({ params }: PageParams) {
   const { slug } = await params;
   const post = await getPostBySlug(slug);
   
+  // Google Analytics gtag snippet
+  const gaScripts = GA_ID ? (
+    <>
+      <Script
+        src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}
+        strategy="afterInteractive"
+      />
+      <Script id="gtag-init" strategy="afterInteractive">
+        {`window.dataLayer = window.dataLayer || [];
+window.gtag = function(){window.dataLayer.push(arguments);};
+gtag('js', new Date());
+gtag('config', '${GA_ID}', { page_path: window.location.pathname });`}
+      </Script>
+    </>
+  ) : null;
+
   // Generate JSON-LD structured data for the blog post
   const jsonLd = {
     '@context': 'https://schema.org',
@@ -34,25 +55,26 @@ export default async function Post({ params }: PageParams) {
       '@type': 'Person',
       name: post.frontMatter.author,
     },
-    image: post.frontMatter.heroImage,
+    image: post.frontMatter.heroImage.startsWith('http') ? post.frontMatter.heroImage : `${baseUrl}${post.frontMatter.heroImage}`,
     description: post.frontMatter.summary || '',
     publisher: {
       '@type': 'Organization',
-      name: 'Nstream AI',
+      name: siteConfig.name,
       logo: {
         '@type': 'ImageObject',
-        url: 'https://yourdomain.com/logo.png', // Replace with your actual logo URL
+        url: `${baseUrl}${siteConfig.ogImage}`,
       },
     },
     mainEntityOfPage: {
       '@type': 'WebPage',
-      '@id': `https://yourdomain.com/blog/${slug}`, // Replace with your domain
+      '@id': `${baseUrl}/blog/${slug}`,
     },
     keywords: post.frontMatter.tags?.join(', ') || '',
   };
 
   return (
     <>
+      {gaScripts}
       {/* Add JSON-LD script */}
       <script
         type="application/ld+json"

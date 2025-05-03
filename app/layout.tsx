@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import StructuredData from "./components/StructuredData";
 import { siteConfig } from "@/config/site";
+import Script from 'next/script';
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -13,6 +14,8 @@ const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
 });
+
+const GA_ID = process.env.NEXT_PUBLIC_GA_ID;
 
 export const viewport: Viewport = {
   themeColor: "#ffffff",
@@ -25,14 +28,14 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   metadataBase: new URL("https://blog.nstream.ai"),
   title: {
-    default: "Nstream AI Blog - AI & Machine Learning Insights",
+    default: "Nstream AI Blog - Solving realtime problems with Generative AI",
     template: "%s | Nstream AI",
   },
-  description: "Explore the latest insights on AI, machine learning, and technology from Nstream AI. Stay updated with our expert analysis and industry trends.",
+  description: "Explore the latest usecases of realtime transactions, data analysis, mcp tool actions, and more.",
   applicationName: "Nstream AI Blog",
   authors: [{ name: "Nstream AI" }],
   generator: "Next.js",
-  keywords: ["AI", "Machine Learning", "Technology", "Artificial Intelligence", "Tech Blog", "Nstream AI"],
+  keywords: ["Nstream AI", "Generative AI", "Real-time", "Data Analysis", "realtime agents", "RAG for realtime data", "Nstream AI Blog"],
   referrer: "origin-when-cross-origin",
   icons: {
     icon: "/favicon.ico",
@@ -42,8 +45,8 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     siteName: "Nstream AI Blog",
-    title: "Nstream AI Blog - AI & Machine Learning Insights",
-    description: "Explore the latest insights on AI, machine learning, and technology from Nstream AI. Stay updated with our expert analysis and industry trends.",
+    title: "Nstream AI Blog - Solving realtime problems with Generative AI",
+    description: "Explore the latest usecases of realtime transactions, data analysis, mcp tool actions, and more.",
     images: [
       {
         url: "/images/nstream-og-image.jpg",
@@ -58,8 +61,8 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     site: "@NstreamAI",
     creator: "@NstreamAI",
-    title: "Nstream AI Blog - AI & Machine Learning Insights",
-    description: "Explore the latest insights on AI, machine learning, and technology from Nstream AI. Stay updated with our expert analysis and industry trends.",
+    title: "Nstream AI Blog - Solving realtime problems with Generative AI",
+    description: "Explore the latest usecases of realtime transactions, data analysis, mcp tool actions, and more.",
     images: ["/images/nstream-og-image.jpg"],
   },
   robots: {
@@ -94,6 +97,24 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
+        {/* Google Analytics gtag */}
+        {GA_ID && (
+          <>
+            <Script
+              src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}
+              strategy="afterInteractive"
+            />
+            <Script id="gtag-init" strategy="afterInteractive">
+              {`window.dataLayer = window.dataLayer || [];
+window.gtag = function(){window.dataLayer.push(arguments);};
+gtag('js', new Date());
+gtag('config', '${GA_ID}', { page_path: window.location.pathname });`}
+            </Script>
+          </>
+        )}
+        {/* Preconnect for analytics & fonts */}
+        <link rel="preconnect" href="https://www.googletagmanager.com" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="canonical" href={siteConfig.url} />
         <StructuredData type="Organization" data={organizationData} />
       </head>
