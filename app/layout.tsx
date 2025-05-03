@@ -16,6 +16,7 @@ const geistMono = Geist_Mono({
 });
 
 const GA_ID = process.env.NEXT_PUBLIC_GA_ID;
+const GTM_ID = 'GTM-MDZV9X5K';
 
 export const viewport: Viewport = {
   themeColor: "#ffffff",
@@ -115,10 +116,29 @@ gtag('config', '${GA_ID}', { page_path: window.location.pathname });`}
         {/* Preconnect for analytics & fonts */}
         <link rel="preconnect" href="https://www.googletagmanager.com" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
+        {/* Google Tag Manager */}
+        <Script
+          id="gtm-head"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','${GTM_ID}');`,
+          }}
+        />
+        {/* End Google Tag Manager */}
         <link rel="canonical" href={siteConfig.url} />
         <StructuredData type="Organization" data={organizationData} />
       </head>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+        {/* Google Tag Manager (noscript) */}
+        <noscript>
+          <iframe
+            src={`https://www.googletagmanager.com/ns.html?id=${GTM_ID}`}
+            height="0"
+            width="0"
+            style={{ display: 'none', visibility: 'hidden' }}
+          />
+        </noscript>
+        {/* End Google Tag Manager (noscript) */}
         {children}
       </body>
     </html>
