@@ -1,4 +1,7 @@
 import { MetadataRoute } from 'next';
+import { siteConfig } from '@/config/site';
+
+const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || siteConfig.url;
 
 export default function robots(): MetadataRoute.Robots {
   return {
@@ -6,6 +9,6 @@ export default function robots(): MetadataRoute.Robots {
       userAgent: '*',
       allow: '/',
     },
-    sitemap: 'https://yourdomain.com/sitemap.xml', // Replace with your actual domain
+    sitemap: `${baseUrl}/sitemap.xml`,
   };
 }

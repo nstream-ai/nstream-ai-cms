@@ -5,18 +5,18 @@ import { useState, useEffect, Key } from 'react';
 import nstreamLogo from '../../assets/nstreamLogo.png'
 import Image from "next/image";
 import Footer from '../Footer';
+import { Post, PostFrontMatter } from '@/types/blog';
 
-/* eslint-disable @typescript-eslint/no-explicit-any */
-type BlogPageProps = {
-    posts: {
-        slug: any;
-        frontMatter: {
-            [key: string]: any;
-        };
-        content?: string;
-    }[];
+// Create a type for blog listing that doesn't require content
+type BlogPost = {
+    slug: string;
+    frontMatter: PostFrontMatter;
+    content?: Post['content'];
 };
-/* eslint-disable @typescript-eslint/no-explicit-any */
+
+interface BlogPageProps {
+    posts: BlogPost[];
+}
 
 export default function BlogPage({ posts }: BlogPageProps) {
     const [page, setPage] = useState(1);

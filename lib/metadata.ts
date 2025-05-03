@@ -14,9 +14,11 @@ type SEOProps = {
 // Default site metadata
 const siteConfig = {
   name: 'Nstream AI Blog',
-  description: 'Insights and updates from Nstream AI',
-  url: 'https://yourdomain.com', // Replace with your actual domain
-  ogImage: '/og-image.jpg', // Create a default OG image and place in public folder
+  description: 'Explore the latest insights on AI, machine learning, and technology from Nstream AI. Stay updated with our expert analysis and industry trends.',
+  url: 'https://blog.nstream.ai', // Update this with your actual domain
+  ogImage: '/images/nstream-og-image.jpg', // Default OG image
+  twitterHandle: '@NstreamAI', // Add your Twitter handle
+  locale: 'en_US',
 };
 
 // Helper function to generate metadata for pages
@@ -31,9 +33,10 @@ export function generateMetadata({
 }: SEOProps): Metadata {
   const fullUrl = url ? `${siteConfig.url}${url}` : siteConfig.url;
   const ogImage = image || `${siteConfig.url}${siteConfig.ogImage}`;
+  const pageTitle = title ? `${title} | ${siteConfig.name}` : siteConfig.name;
 
   return {
-    title: `${siteConfig.name}`,
+    title: pageTitle,
     description: description || siteConfig.description,
     authors: [{ name: 'Nstream AI' }],
     keywords: tags || [],
@@ -41,8 +44,19 @@ export function generateMetadata({
     alternates: {
       canonical: fullUrl,
     },
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+        'max-video-preview': -1,
+        'max-image-preview': 'large',
+        'max-snippet': -1,
+      },
+    },
     openGraph: {
-      title: title || siteConfig.name,
+      title: pageTitle,
       description: description || siteConfig.description,
       url: fullUrl,
       siteName: siteConfig.name,
@@ -54,14 +68,19 @@ export function generateMetadata({
           alt: title || siteConfig.name,
         },
       ],
-      locale: 'en_US',
+      locale: siteConfig.locale,
       type: type as "website" | "article" | "book" | "profile",
-      ...(date && type === 'article' ? { publishedTime: date } : {}),
+      ...(date && type === 'article' ? { 
+        publishedTime: date,
+        authors: ['Nstream AI'],
+      } : {}),
     },
     twitter: {
       card: 'summary_large_image',
-      title: title || siteConfig.name,
+      title: pageTitle,
       description: description || siteConfig.description,
+      site: siteConfig.twitterHandle,
+      creator: siteConfig.twitterHandle,
       images: [ogImage],
     },
   };
