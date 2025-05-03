@@ -28,6 +28,13 @@ export default async function Post({ params }: PageParams) {
   const { slug } = await params;
   const post = await getPostBySlug(slug);
   
+  // Compute safe image URL if heroImage exists
+  const imageUrl = post.frontMatter.heroImage
+    ? (post.frontMatter.heroImage.startsWith('http')
+        ? post.frontMatter.heroImage
+        : `${baseUrl}${post.frontMatter.heroImage}`)
+    : undefined;
+
   // Google Analytics gtag snippet
   const gaScripts = GA_ID ? (
     <>
@@ -55,7 +62,7 @@ gtag('config', '${GA_ID}', { page_path: window.location.pathname });`}
       '@type': 'Person',
       name: post.frontMatter.author,
     },
-    image: post.frontMatter.heroImage.startsWith('http') ? post.frontMatter.heroImage : `${baseUrl}${post.frontMatter.heroImage}`,
+    image: imageUrl,
     description: post.frontMatter.summary || '',
     publisher: {
       '@type': 'Organization',
