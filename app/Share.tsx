@@ -1,56 +1,99 @@
 'use client';
 
-import Image from 'next/image';
 import { useState, useEffect } from 'react';
-import share from '../assets/share.png';
-import shareHover from '../assets/share.png';
 
 interface ShareButtonProps {
   url?: string;
 }
 
+const sharePlatforms = [
+  {
+    type: 'x',
+    label: 'X',
+    url: (shareUrl: string, title: string) => `https://twitter.com/intent/tweet?url=${encodeURIComponent(shareUrl)}&text=${encodeURIComponent(title)}`,
+  },
+  {
+    type: 'linkedin',
+    label: 'LinkedIn',
+    url: (shareUrl: string, title: string) => `https://www.linkedin.com/shareArticle?mini=true&url=${encodeURIComponent(shareUrl)}&title=${encodeURIComponent(title)}`,
+  },
+  {
+    type: 'whatsapp',
+    label: 'WhatsApp',
+    url: (shareUrl: string, title: string) => `https://wa.me/?text=${encodeURIComponent(title + ' ' + shareUrl)}`,
+  },
+];
+
+declare global {
+  interface Window {
+    dataLayer: unknown[];
+  }
+}
+
 const ShareButton = ({ url }: ShareButtonProps) => {
-  const [isHovered, setIsHovered] = useState(false);
   const [showCopyTooltip, setShowCopyTooltip] = useState(false);
   const [currentUrl, setCurrentUrl] = useState<string>('');
+  const [title, setTitle] = useState<string>('');
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    // Set URL once component mounts in the browser
     setCurrentUrl(url || window.location.href);
+    setTitle(document.title);
+    setMounted(true);
   }, [url]);
 
-  const handleShare = () => {
-    // Check if it's mobile (using navigator.share API availability)
-    if (typeof navigator !== 'undefined' && navigator.share) {
-      // Mobile device - use native share
-      navigator.share({
-        title: document.title,
-        url: currentUrl
-      }).catch(error => console.error('Error sharing:', error));
-    } else {
-      // Desktop - copy link to clipboard
-      if (typeof navigator !== 'undefined' && navigator.clipboard) {
-        navigator.clipboard.writeText(currentUrl)
-          .then(() => {
-            setShowCopyTooltip(true);
-            setTimeout(() => setShowCopyTooltip(false), 2000);
-          })
-          .catch(error => console.error('Could not copy text: ', error));
-      }
+  if (!mounted) return null;
+
+  const handleShare = (type: string, shareUrl: string) => {
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({
+      event: 'blog_share',
+      share_type: type,
+      blog_url: window.location.pathname,
+    });
+    window.open(shareUrl, '_blank', 'noopener,noreferrer');
+  };
+
+  const handleCopy = () => {
+    if (typeof navigator !== 'undefined' && navigator.clipboard) {
+      navigator.clipboard.writeText(currentUrl)
+        .then(() => {
+          setShowCopyTooltip(true);
+          setTimeout(() => setShowCopyTooltip(false), 2000);
+        })
+        .catch(error => console.error('Could not copy text: ', error));
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({
+        event: 'blog_share',
+        share_type: 'copy',
+        blog_url: window.location.pathname,
+      });
     }
   };
 
   return (
     <div className="relative inline-block">
-      <Image
-        src={isHovered ? shareHover : share}
-        alt="share"
-        className="w-[30px] h-[30px] cursor-pointer"
-        onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => setIsHovered(false)}
-        onClick={handleShare}
-      />
-      
+      <div className="flex gap-2">
+        {sharePlatforms.map(platform => (
+          <button
+            key={platform.type}
+            data-share-type={platform.type}
+            aria-label={`Share on ${platform.label}`}
+            onClick={() => handleShare(platform.type, platform.url(currentUrl, title))}
+            className="px-2 py-1 rounded bg-gray-100 hover:bg-gray-200 text-sm"
+          >
+            {platform.label}
+          </button>
+        ))}
+        <button
+          data-share-type="copy"
+          aria-label="Copy link"
+          onClick={handleCopy}
+          className="px-2 py-1 rounded bg-gray-100 hover:bg-gray-200 text-sm"
+        >
+          Copy Link
+        </button>
+      </div>
       {showCopyTooltip && (
         <div className="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white px-2 py-1 rounded text-sm whitespace-nowrap">
           Link copied!
