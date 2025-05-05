@@ -1,6 +1,5 @@
 import Image from 'next/image';
 import nstreamLogo from '../../../assets/nstreamLogo.png';
-import SocialIcons from '@/app/SocialIcons';
 import Footer from '@/app/Footer';
 import ShareButton from '@/app/Share';
 import { Post } from '@/types/blog';
@@ -69,7 +68,6 @@ export default function PostContent({ post }: { post: Post }) {
         {/* Share */}
         <div className='flex justify-start items-center gap-[6%] w-full mt-[4%]'>
           <ShareButton />
-          <SocialIcons />
         </div>
       </div>
       
