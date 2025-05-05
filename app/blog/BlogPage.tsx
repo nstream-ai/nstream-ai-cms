@@ -122,7 +122,21 @@ export default function BlogPage({ posts }: BlogPageProps) {
                                     <li key={post.slug} className="border-b-2 p-4 py-8 flex flex-col rounded-md ">
                                         <p className='my-4 text-[#777777] text-xs'>{post.frontMatter.date}</p>
                                         <div className='flex flex-col sm:flex-row justify-between w-full gap-4'>
-                                            <Link href={`/blog/${post.slug}`} className="text-xl font-normal text-[#474747] hover:text-red-600 transition duration-300 ease-in-out">
+                                            <Link 
+                                                href={`/blog/${post.slug}`}
+                                                className="text-xl font-normal text-[#474747] hover:text-red-600 transition duration-300 ease-in-out"
+                                                data-blog-title={post.frontMatter.title}
+                                                onClick={() => {
+                                                    if (typeof window !== 'undefined') {
+                                                        window.dataLayer = window.dataLayer || [];
+                                                        window.dataLayer.push({
+                                                            event: 'blog_list_click',
+                                                            blog_title: post.frontMatter.title,
+                                                            blog_url: `/blog/${post.slug}`,
+                                                        });
+                                                    }
+                                                }}
+                                            >
                                                 {post.frontMatter.title}
                                             </Link>
                                             {/* Tags */}
