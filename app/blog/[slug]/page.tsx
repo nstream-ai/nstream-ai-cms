@@ -50,7 +50,7 @@ gtag('config', '${GA_ID}', { page_path: window.location.pathname });`}
       </Script>
     </>
   ) : null;
-
+  
   // Generate JSON-LD structured data for the blog post
   const jsonLd = {
     '@context': 'https://schema.org',
