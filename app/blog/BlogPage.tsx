@@ -60,7 +60,7 @@ export default function BlogPage({ posts }: BlogPageProps) {
         <div className="mx-auto pt-8 px-4 min-h-screen flex flex-col justify-between bg-[#FCFCF8]">
             {/* Header */}
             <div className="flex justify-around flex-col sm:flex-row gap-[20px] sm:gap-[0px] items-center w-full">
-                <Link href="https://nstream.ai" className='w-[158px] h-[43px] rounded-md bg-[#f8f6f4] flex justify-end items-center mx-auto pr-1'>
+                <Link href="https://nstream.ai" className='w-[158px] h-[43px] rounded-md bg-[#f8f6f4] flex justify-end items-center ml-[-20px] pr-1'>
                     <Image src="/nstream-logo-with-text.svg" alt="Nstream AI Logo" width={144} height={72} />
                 </Link>
                 <div className="flex justify-around w-full sm:w-[50%] items-center gap-[80px]">
