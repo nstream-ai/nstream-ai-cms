@@ -57,21 +57,21 @@ export default function BlogPage({ posts }: BlogPageProps) {
     };
 
     return (
-        <div className="mx-auto pt-8 px-4 min-h-screen flex flex-col justify-between bg-[#FCFCF8]">
+        <div className="mx-auto pt-4 px-4 min-h-screen flex flex-col justify-between bg-[#FCFCF8]">
             {/* Header */}
-            <div className="flex flex-col sm:flex-row items-center w-full justify-between">
-                <Link href="https://nstream.ai" className="w-[158px] h-[43px] rounded-md bg-[#f8f6f4] flex justify-end items-center pl-0">
-                    <Image src="/nstream-logo-with-text.svg" alt="Nstream AI Logo" width={144} height={72} />
+            <div className="flex flex-row items-center justify-between w-full px-2 sm:px-4 py-2">
+                <Link href="https://nstream.ai" className="min-w-[100px] w-[120px] sm:w-[158px] h-[36px] sm:h-[43px] rounded-md bg-[#f8f6f4] flex justify-end items-center">
+                    <Image src="/nstream-logo-with-text.svg" alt="Nstream AI Logo" width={100} height={36} className="sm:w-[144px] sm:h-[72px] w-[100px] h-[36px] object-contain" />
                 </Link>
-                <Link href="https://docs.nstream.ai" target="_blank" rel="noopener noreferrer" title="Open Nstream Docs in a new tab" className="px-6 py-2 rounded-md bg-[#f8f6f4] flex justify-center items-center">
+                <Link href="https://docs.nstream.ai" target="_blank" rel="noopener noreferrer" title="Open Nstream Docs in a new tab" className="px-2 sm:px-6 py-2 rounded-md bg-[#f8f6f4] flex justify-center items-center transition hover:bg-[#f0eaea] min-w-[60px] min-h-[36px] text-sm sm:text-lg">
                     <span className="text-[#474747] font-medium flex items-center gap-[2px]">Docs
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="inline align-middle relative top-[1px] ml-[2px]" aria-hidden="true"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 17L19 5M19 5H9m10 0v10" /></svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="inline align-middle relative top-[1px] ml-[2px]" aria-hidden="true"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 17L19 5M19 5H9m10 0v10" /></svg>
                     </span>
                 </Link>
             </div>
-
+            <div className="w-full border-b border-[#ececec] my-2 sm:my-4 mx-2 sm:mx-0"></div>
             <div className='flex flex-col sm:flex-row justify-center min-h-[800px]'>
-                <div className='w-full max-w-5xl flex flex-col items-start mt-[60px] mx-auto px-4 sm:px-8 lg:px-12'>
+                <div className='w-full max-w-3xl flex flex-col items-start mt-4 sm:mt-8 mx-auto px-2 sm:px-8 lg:px-12'>
                     <div className='w-full'>
                         <div><p className='text-black font-normal text-2xl'>Recent Posts</p></div>
 
@@ -94,7 +94,7 @@ export default function BlogPage({ posts }: BlogPageProps) {
 
                                         {/* Underline only on active tab */}
                                         {activeTab === tab && (
-                                            <span className="absolute left-0 bottom-[-4px] w-full h-[3px] bg-[#9B2020] rounded-full" />
+                                            <span className="absolute left-0 bottom-[-4px] w-full h-[4px] bg-[#9B2020] rounded-full shadow-sm" />
                                         )}
                                     </button>
                                 ))}
