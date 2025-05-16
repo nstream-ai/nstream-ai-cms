@@ -22,13 +22,13 @@ export default function PostContent({ post }: { post: Post }) {
       </div>
 
       {/* BLOG CONTENT */}
-      <div className='flex flex-col justify-center items-center w-full sm:w-[70%] lg:w-[50%] mt-[10%] sm:mt-[4%] text-[#474747]'>
+      <article className='flex flex-col justify-center items-center w-full sm:w-[70%] lg:w-[50%] mt-[10%] sm:mt-[4%] text-[#474747]'>
         <div className='text-left w-full'>
           {frontMatter.category && (
-            <div><h1 className="text-[#777777] text-[16px] mb-2">{frontMatter.category}</h1></div>
+            <div><h1 className="category text-[#777777] text-[16px] mb-2">{frontMatter.category}</h1></div>
           )}
           <div><h1 className="text-[28px] font-normal mb-2">{frontMatter.title}</h1></div>
-          <div><p className="text-[#777777] text-[16px] mb-8">{frontMatter.date} | {frontMatter.author}</p></div>
+          <div><p className="author text-[#777777] text-[16px] mb-8">{frontMatter.date} | {frontMatter.author}</p></div>
         </div>
         
         {/* Hero Image */}
@@ -69,7 +69,7 @@ export default function PostContent({ post }: { post: Post }) {
         <div className='flex justify-start items-center gap-[6%] w-full mt-[4%]'>
           <ShareButton />
         </div>
-      </div>
+      </article>
       
       <div className='w-full mt-12'>
         <Footer />

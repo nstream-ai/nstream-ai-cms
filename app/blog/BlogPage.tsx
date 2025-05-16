@@ -5,6 +5,7 @@ import { useState, useEffect, Key } from 'react';
 import Image from "next/image";
 import Footer from '../Footer';
 import { Post, PostFrontMatter } from '@/types/blog';
+import GTMEvents from '../components/GTMEvents';
 
 // Create a type for blog listing that doesn't require content
 type BlogPost = {
@@ -58,12 +59,13 @@ export default function BlogPage({ posts }: BlogPageProps) {
 
     return (
         <div className="mx-auto pt-4 px-4 min-h-screen flex flex-col justify-between bg-[#FCFCF8]">
+            <GTMEvents />
             {/* Header */}
             <div className="flex flex-row items-center justify-between w-full px-2 sm:px-4 py-2">
-                <Link href="https://nstream.ai" className="min-w-[100px] w-[120px] sm:w-[158px] h-[36px] sm:h-[43px] rounded-md bg-[#f8f6f4] flex justify-end items-center">
+                <Link href="https://nstream.ai" className="cta-button min-w-[100px] w-[120px] sm:w-[158px] h-[36px] sm:h-[43px] rounded-md bg-[#f8f6f4] flex justify-end items-center" data-cta-type="cross-domain">
                     <Image src="/nstream-logo-with-text.svg" alt="Nstream AI Logo" width={100} height={36} className="sm:w-[144px] sm:h-[72px] w-[100px] h-[36px] object-contain" />
                 </Link>
-                <Link href="https://docs.nstream.ai" target="_blank" rel="noopener noreferrer" title="Open Nstream Docs in a new tab" className="px-2 sm:px-6 py-2 rounded-md bg-[#f8f6f4] flex justify-center items-center transition hover:bg-[#f0eaea] min-w-[60px] min-h-[36px] text-sm sm:text-lg">
+                <Link href="https://docs.nstream.ai" target="_blank" rel="noopener noreferrer" title="Open Nstream Docs in a new tab" className="cta-button px-2 sm:px-6 py-2 rounded-md bg-[#f8f6f4] flex justify-center items-center transition hover:bg-[#f0eaea] min-w-[60px] min-h-[36px] text-sm sm:text-lg" data-cta-type="cross-domain">
                     <span className="text-[#474747] font-medium flex items-center gap-[2px]">Docs
                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="inline align-middle relative top-[1px] ml-[2px]" aria-hidden="true"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 17L19 5M19 5H9m10 0v10" /></svg>
                     </span>
