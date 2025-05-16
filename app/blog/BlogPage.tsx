@@ -70,7 +70,7 @@ export default function BlogPage({ posts }: BlogPageProps) {
                 </Link>
             </div>
             <div className="w-full border-b border-[#ececec] my-2 sm:my-4 mx-2 sm:mx-0"></div>
-            <div className='flex flex-col sm:flex-row justify-center min-h-[800px]'>
+            <div className='flex flex-col sm:flex-row justify-center flex-1'>
                 <div className='w-full max-w-3xl flex flex-col items-start mt-4 sm:mt-8 mx-auto px-2 sm:px-8 lg:px-12'>
                     <div className='w-full'>
                         <div><p className='text-black font-normal text-2xl'>Recent Posts</p></div>
