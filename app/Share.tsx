@@ -47,7 +47,7 @@ const ShareButton = ({ url }: ShareButtonProps) => {
   const handleShare = (type: string, shareUrl: string) => {
     window.dataLayer = window.dataLayer || [];
     window.dataLayer.push({
-      event: 'blog_share',
+      event: 'blog_event_social_share',
       share_type: type,
       blog_url: window.location.pathname,
     });
@@ -64,7 +64,7 @@ const ShareButton = ({ url }: ShareButtonProps) => {
         .catch(error => console.error('Could not copy text: ', error));
       window.dataLayer = window.dataLayer || [];
       window.dataLayer.push({
-        event: 'blog_share',
+        event: 'blog_event_social_share',
         share_type: 'copy',
         blog_url: window.location.pathname,
       });
@@ -77,19 +77,19 @@ const ShareButton = ({ url }: ShareButtonProps) => {
         {sharePlatforms.map(platform => (
           <button
             key={platform.type}
+            className="share-button px-2 py-1 rounded bg-gray-100 hover:bg-gray-200 text-sm"
             data-share-type={platform.type}
             aria-label={`Share on ${platform.label}`}
             onClick={() => handleShare(platform.type, platform.url(currentUrl, title))}
-            className="px-2 py-1 rounded bg-gray-100 hover:bg-gray-200 text-sm"
           >
             {platform.label}
           </button>
         ))}
         <button
+          className="share-button px-2 py-1 rounded bg-gray-100 hover:bg-gray-200 text-sm"
           data-share-type="copy"
           aria-label="Copy link"
           onClick={handleCopy}
-          className="px-2 py-1 rounded bg-gray-100 hover:bg-gray-200 text-sm"
         >
           Copy Link
         </button>

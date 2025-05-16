@@ -5,6 +5,7 @@ import { useState, useEffect, Key } from 'react';
 import Image from "next/image";
 import Footer from '../Footer';
 import { Post, PostFrontMatter } from '@/types/blog';
+import GTMEvents from '../components/GTMEvents';
 
 // Create a type for blog listing that doesn't require content
 type BlogPost = {
@@ -57,34 +58,23 @@ export default function BlogPage({ posts }: BlogPageProps) {
     };
 
     return (
-        <div className="mx-auto pt-8 px-4 min-h-screen flex flex-col justify-between bg-[#FCFCF8]">
+        <div className="mx-auto pt-4 px-4 min-h-screen flex flex-col justify-between bg-[#FCFCF8]">
+            <GTMEvents />
             {/* Header */}
-            <div className="flex justify-around flex-col sm:flex-row gap-[20px] sm:gap-[0px] items-center w-full">
-                <Link href="https://nstream.ai" className='w-[158px] h-[43px] rounded-md bg-[#f8f6f4] flex justify-end items-center ml-[-20px] pr-1'>
-                    <Image src="/nstream-logo-with-text.svg" alt="Nstream AI Logo" width={144} height={72} />
+            <div className="flex flex-row items-center justify-between w-full px-2 sm:px-4 py-2">
+                <Link href="https://nstream.ai" className="cta-button min-w-[100px] w-[120px] sm:w-[158px] h-[36px] sm:h-[43px] rounded-md bg-[#f8f6f4] flex justify-end items-center" data-cta-type="cross-domain">
+                    <Image src="/nstream-logo-with-text.svg" alt="Nstream AI Logo" width={100} height={36} className="sm:w-[144px] sm:h-[72px] w-[100px] h-[36px] object-contain" />
                 </Link>
-                <div className="flex justify-around w-full sm:w-[50%] items-center gap-[80px]">
-                    {/* <div className='relative sm:mt-0 mt-[10px] w-full sm:w-[400px]'>
-                        <input
-                            className='h-[40px] bg-[#F4F4F4] w-full sm:w-[400px] rounded-sm placeholder-[#474747] pl-4'
-                            placeholder='Search'
-                            value={query}
-                            onChange={handleSearch}
-                        />
-                        <button className='absolute top-0 right-0 bg-[#FFBA9D] w-[40px] h-[40px] rounded-sm flex justify-center items-center'>
-                            <Image src={searchIcon} alt='searchIcon' className='h-[16px] w-[16px]' />
-                        </button>
-                    </div> */}
-                </div>
+                <Link href="https://docs.nstream.ai" target="_blank" rel="noopener noreferrer" title="Open Nstream Docs in a new tab" className="cta-button px-2 sm:px-6 py-2 rounded-md bg-[#f8f6f4] flex justify-center items-center transition hover:bg-[#f0eaea] min-w-[60px] min-h-[36px] text-sm sm:text-lg" data-cta-type="cross-domain">
+                    <span className="text-[#474747] font-medium flex items-center gap-[2px]">Docs
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="inline align-middle relative top-[1px] ml-[2px]" aria-hidden="true"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 17L19 5M19 5H9m10 0v10" /></svg>
+                    </span>
+                </Link>
             </div>
-
-            <div className='flex flex-col sm:flex-row justify-center min-h-[800px]'>
-                <div className=' w-[40%] flex flex-col items-center'>
-                    {/* Left column content */}
-                </div>
-                {/* Posts */}
-                <div className='w-full flex flex-col items-start mt-[60px]'>
-                    <div className='pr-[10%] w-full'>
+            <div className="w-full border-b border-[#ececec] my-2 sm:my-4 mx-2 sm:mx-0"></div>
+            <div className='flex flex-col sm:flex-row justify-center flex-1'>
+                <div className='w-full max-w-3xl flex flex-col items-start mt-4 sm:mt-8 mx-auto px-2 sm:px-8 lg:px-12'>
+                    <div className='w-full'>
                         <div><p className='text-black font-normal text-2xl'>Recent Posts</p></div>
 
                         {/* Tabs */}
@@ -106,7 +96,7 @@ export default function BlogPage({ posts }: BlogPageProps) {
 
                                         {/* Underline only on active tab */}
                                         {activeTab === tab && (
-                                            <span className="absolute left-0 bottom-[-4px] w-full h-[3px] bg-[#474747] rounded-full" />
+                                            <span className="absolute left-0 bottom-[-4px] w-full h-[4px] bg-[#9B2020] rounded-full shadow-sm" />
                                         )}
                                     </button>
                                 ))}
@@ -122,7 +112,7 @@ export default function BlogPage({ posts }: BlogPageProps) {
                                         <div className='flex flex-col sm:flex-row justify-between w-full gap-4'>
                                             <Link 
                                                 href={`/blog/${post.slug}`}
-                                                className="text-xl font-normal text-[#474747] hover:text-red-600 transition duration-300 ease-in-out"
+                                                className="text-xl font-normal text-[#474747] hover:text-[#9B2020] transition duration-300 ease-in-out"
                                                 data-blog-title={post.frontMatter.title}
                                                 onClick={() => {
                                                     if (typeof window !== 'undefined') {

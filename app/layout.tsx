@@ -15,7 +15,6 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-const GA_ID = process.env.NEXT_PUBLIC_GA_ID;
 const GTM_ID = 'GTM-MDZV9X5K';
 
 export const viewport: Viewport = {
@@ -98,21 +97,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        {/* Google Analytics gtag */}
-        {GA_ID && (
-          <>
-            <Script
-              src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}
-              strategy="afterInteractive"
-            />
-            <Script id="gtag-init" strategy="afterInteractive">
-              {`window.dataLayer = window.dataLayer || [];
-window.gtag = function(){window.dataLayer.push(arguments);};
-gtag('js', new Date());
-gtag('config', '${GA_ID}', { page_path: window.location.pathname });`}
-            </Script>
-          </>
-        )}
+        {/* Remove direct Google Analytics gtag.js/GA4 Script injection */}
         {/* Preconnect for analytics & fonts */}
         <link rel="preconnect" href="https://www.googletagmanager.com" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
