@@ -6,6 +6,7 @@ import Image from "next/image";
 import Footer from '../Footer';
 import { Post, PostFrontMatter } from '@/types/blog';
 import GTMEvents from '../components/GTMEvents';
+import GTMElementVisibility from '../components/GTMElementVisibility';
 
 // Create a type for blog listing that doesn't require content
 type BlogPost = {
@@ -60,6 +61,7 @@ export default function BlogPage({ posts }: BlogPageProps) {
     return (
         <div className="mx-auto pt-4 px-4 min-h-screen flex flex-col justify-between bg-[#FCFCF8]">
             <GTMEvents />
+            <GTMElementVisibility />
             {/* Header */}
             <div className="flex flex-row items-center justify-between w-full px-2 sm:px-4 py-2">
                 <Link href="https://nstream.ai" className="cta-button min-w-[100px] w-[120px] sm:w-[158px] h-[36px] sm:h-[43px] rounded-md bg-[#f8f6f4] flex justify-end items-center" data-cta-type="cross-domain">

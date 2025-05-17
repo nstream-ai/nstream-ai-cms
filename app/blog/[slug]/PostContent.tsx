@@ -22,7 +22,7 @@ export default function PostContent({ post }: { post: Post }) {
       </div>
 
       {/* BLOG CONTENT */}
-      <article className='flex flex-col justify-center items-center w-full sm:w-[70%] lg:w-[50%] mt-[10%] sm:mt-[4%] text-[#474747]'>
+      <article className='article-content flex flex-col justify-center items-center w-full sm:w-[70%] lg:w-[50%] mt-[10%] sm:mt-[4%] text-[#474747]'>
         <div className='text-left w-full'>
           {frontMatter.category && (
             <div><h1 className="category text-[#777777] text-[16px] mb-2">{frontMatter.category}</h1></div>
@@ -66,7 +66,7 @@ export default function PostContent({ post }: { post: Post }) {
         )}
         
         {/* Share */}
-        <div className='flex justify-start items-center gap-[6%] w-full mt-[4%]'>
+        <div className='social-share flex justify-start items-center gap-[6%] w-full mt-[4%]'>
           <ShareButton />
         </div>
       </article>
