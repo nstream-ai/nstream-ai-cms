@@ -1,14 +1,20 @@
+'use client';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Post } from '@/types/blog';
 import { ContentBlockRenderer } from '@/app/ContentBlockRenderer';
 import ShareButton from '@/app/components/Share';
 import Footer from '@/app/components/Footer';
+import GTMEvents from '@/app/components/GTMEvents';
+import GTMElementVisibility from '@/app/components/GTMElementVisibility';
 
 export default function PostContent({ post }: { post: Post }) {
   const { frontMatter, content } = post;
 
   return (
+    <>
+      <GTMEvents />
+      <GTMElementVisibility />
     <div className="mx-auto pt-4 px-4 bg-[#FCFCF8] text-black flex flex-col justify-between align-center items-center min-h-screen">
       {/* Header */}
       <div className="flex flex-row items-center justify-between w-full px-2 sm:px-4 py-2">
@@ -60,8 +66,8 @@ export default function PostContent({ post }: { post: Post }) {
         {frontMatter.tags && frontMatter.tags.length > 0 && (
           <div className="flex flex-wrap gap-2 mt-8 mb-4 w-full">
             {frontMatter.tags.map(tag => (
-              <span key={tag} className="bg-[#F4F4F4] text-[#474747] px-3 py-1 rounded-full text-sm">
-                {tag}
+              <span key={tag} className="bg-[#F4F4F4] text-[#474747] px-3 py-1 rounded-md text-sm">
+                #{tag}
               </span>
             ))}
           </div>
@@ -77,5 +83,6 @@ export default function PostContent({ post }: { post: Post }) {
         <Footer />
       </div>
     </div>
+    </>
   );
 }

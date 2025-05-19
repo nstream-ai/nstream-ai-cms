@@ -1,6 +1,12 @@
 'use client';
 
 import { useState } from 'react';
+
+declare global {
+  interface Window {
+    dataLayer: unknown[];
+  }
+}
 import { usePathname } from 'next/navigation';
 
 const ShareButton = () => {
@@ -13,6 +19,13 @@ const ShareButton = () => {
       await navigator.clipboard.writeText(shareUrl);
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
+      
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({
+        event: 'blog_event_social_share',
+        share_type: 'copy',
+        blog_url: window.location.pathname,
+      });
     } catch (err) {
       console.error('Failed to copy:', err);
     }
@@ -32,7 +45,13 @@ const ShareButton = () => {
     }
 
     if (shareLink) {
-      window.open(shareLink, '_blank');
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({
+        event: 'blog_event_social_share',
+        share_type: platform,
+        blog_url: window.location.pathname,
+      });
+      window.open(shareLink, '_blank', 'noopener,noreferrer');
     }
   };
 
