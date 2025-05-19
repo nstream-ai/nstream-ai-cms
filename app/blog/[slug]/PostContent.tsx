@@ -1,25 +1,27 @@
 import Image from 'next/image';
-import nstreamLogo from '../../../assets/nstreamLogo.png';
-import Footer from '@/app/Footer';
-import ShareButton from '@/app/Share';
+import Link from 'next/link';
 import { Post } from '@/types/blog';
-import { ContentBlockRenderer } from '../../ContentBlockRenderer';
+import { ContentBlockRenderer } from '@/app/ContentBlockRenderer';
+import ShareButton from '@/app/components/Share';
+import Footer from '@/app/components/Footer';
 
 export default function PostContent({ post }: { post: Post }) {
   const { frontMatter, content } = post;
 
   return (
-    <div className="mx-auto pt-8 px-4 bg-[#FCFCF8] text-black flex flex-col justify-between align-center items-center min-h-screen">
+    <div className="mx-auto pt-4 px-4 bg-[#FCFCF8] text-black flex flex-col justify-between align-center items-center min-h-screen">
       {/* Header */}
-      <div className="flex justify-around flex-col sm:flex-row gap-[20px] sm:gap-[0px] items-center w-full">
-        <div className='w-full sm:w-fit px-3 py-6 rounded-md h-[40px] bg-[#f8f6f4] items-center gap-[10px] flex justify-center'>
-          <Image src={nstreamLogo} alt='nstreamLogo' />
-          <p className='text-[16px] sm:text-[20px] font-medium text-[#474747]'>Nstream AI</p>
-        </div>
-        <div className="flex justify-around w-full sm:w-[50%] items-center gap-[80px]">
-          {/* Header content */}
-        </div>
+      <div className="flex flex-row items-center justify-between w-full px-2 sm:px-4 py-2">
+        <Link href="https://nstream.ai" className="cta-button min-w-[100px] w-[120px] sm:w-[158px] h-[36px] sm:h-[43px] rounded-md bg-[#f8f6f4] flex justify-end items-center" data-cta-type="cross-domain">
+          <Image src="/nstream-logo-with-text.svg" alt="Nstream AI Logo" width={100} height={36} className="sm:w-[144px] sm:h-[72px] w-[100px] h-[36px] object-contain" />
+        </Link>
+        <Link href="https://docs.nstream.ai" target="_blank" rel="noopener noreferrer" title="Open Nstream Docs in a new tab" className="cta-button px-2 sm:px-6 py-2 rounded-md bg-[#f8f6f4] flex justify-center items-center transition hover:bg-[#f0eaea] min-w-[60px] min-h-[36px] text-sm sm:text-lg" data-cta-type="cross-domain">
+          <span className="text-[#474747] font-medium flex items-center gap-[2px]">Docs
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="inline align-middle relative top-[1px] ml-[2px]" aria-hidden="true"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 17L19 5M19 5H9m10 0v10" /></svg>
+          </span>
+        </Link>
       </div>
+      <div className="w-full border-b border-[#ececec] my-2 sm:my-4 mx-2 sm:mx-0"></div>
 
       {/* BLOG CONTENT */}
       <article className='article-content flex flex-col justify-center items-center w-full sm:w-[70%] lg:w-[50%] mt-[10%] sm:mt-[4%] text-[#474747]'>
